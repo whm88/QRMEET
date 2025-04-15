@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "qrmeet"
+version = "0.1.0"
+description = ""
+authors = ["whm88 <wahib.mzali@avaxia-group.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.12"
+pydantic-settings = "^2.8.1"
+uvicorn = {extras = ["standard"], version = "^0.34.1"}
+sqlalchemy = "^2.0.40"
+pymysql = "^1.1.1"
+cryptography = "^44.0.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+httpx = "^0.28.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
