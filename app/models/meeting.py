@@ -15,3 +15,5 @@ class Meeting(Base):
     email = Column(String(100))
     confirmed = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
+    phone = Column(String(255), nullable=True)
+    department = Column(String(50))
