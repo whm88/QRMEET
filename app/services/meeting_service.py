@@ -12,6 +12,8 @@ def create_meeting(db: Session, data: dict) -> str:
         time=data["time"],
         user_name=data["user_name"],
         email=data["email"],
+        department=data["department"],
+        phone=data["phone"],
         confirmed=False,
     )
     db.add(meeting)
@@ -28,6 +30,8 @@ def update_meeting(db: Session, meeting_id: str, data: dict):
     meeting.time = data["time"]
     meeting.user_name = data["user_name"]
     meeting.email = data["email"]
+    meeting.department=data["department"]
+    meeting.phone=data["phone"]
     meeting.confirmed = True
     db.commit()
     return meeting

@@ -9,6 +9,8 @@ class MeetingBase(BaseModel):
     time: time
     user_name: str
     email: str
+    phone: str
+    department: str
 
 
 class MeetingResponse(MeetingBase):
