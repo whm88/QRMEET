@@ -4,7 +4,7 @@ QRMeet is a FastAPI-based application that handles meetings, their creation, ret
 
 ## Features
 
-- **Create Meetings**: Allows users to create new meetings with details like title, user name, email, date, and time.
+- **Create Meetings**: Allows users to create new meetings with details like reason, user name, email, date, and time.
 - **Get Meetings**: Retrieve meetings by ID.
 - **Update Meetings**: Update details of an existing meeting.
 
@@ -16,6 +16,8 @@ QRMeet is a FastAPI-based application that handles meetings, their creation, ret
 ## How to get started
 
 poetry install
+
 poetry shell
+
 poetry run uvicorn app.main:app --reload
 

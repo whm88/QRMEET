@@ -9,7 +9,7 @@ class Meeting(Base):
     __tablename__ = "meetings"
 
     id = Column(String(36), primary_key=True, index=True)
-    title = Column(String(255))
+    reason = Column(String(255))
     date = Column(Date)
     time = Column(Time)
     user_name = Column(String(100))
@@ -22,7 +22,7 @@ class Meeting(Base):
     def to_dict(self):
         return {
             "id": self.id,
-            "title": self.title,
+            "reason": self.reason,
             "date": self.date,
             "time": self.time,
             "user_name": self.user_name,

@@ -4,7 +4,7 @@ from typing import Optional
 
 
 class MeetingBase(BaseModel):
-    title: str
+    reason: str
     date: date
     time: time
     user_name: str
