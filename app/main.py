@@ -1,6 +1,5 @@
 from fastapi import FastAPI
-from .api.meetings import router  # Import the router from your versioned API
-
+from .api.meetings import router
 app = FastAPI()
 
 # Include API router for versioning

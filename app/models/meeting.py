@@ -4,6 +4,7 @@ from datetime import datetime
 
 Base = declarative_base()
 
+
 class Meeting(Base):
     __tablename__ = "meetings"
 
@@ -17,3 +18,17 @@ class Meeting(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     phone = Column(String(255), nullable=True)
     department = Column(String(50))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "date": self.date,
+            "time": self.time,
+            "user_name": self.user_name,
+            "email": self.email,
+            "confirmed": self.confirmed,
+            "created_at": self.created_at,
+            "phone": self.phone,
+            "department": self.department
+        }

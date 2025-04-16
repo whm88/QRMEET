@@ -30,3 +30,4 @@ class MeetingCreateResponse(BaseModel):
 
 class MeetingUpdateResponse(BaseModel):
     message: str
+    status: str
