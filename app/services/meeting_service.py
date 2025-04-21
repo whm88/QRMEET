@@ -7,13 +7,13 @@ def create_meeting(db: Session, data: dict) -> str:
     meeting_id = str(uuid.uuid4())
     meeting = Meeting(
         id=meeting_id,
-        reason=data["reason"],
-        date=data["date"],
-        time=data["time"],
-        user_name=data["user_name"],
-        email=data["email"],
-        department=data["department"],
-        phone=data["phone"],
+        reason=data.get("reason"),
+        date=data.get("date"),
+        time=data.get("time"),
+        user_name=data.get("user_name"),
+        email=data.get("email"),
+        department=data.get("department"),
+        phone=data.get("phone"),
         confirmed=False,
     )
     db.add(meeting)
