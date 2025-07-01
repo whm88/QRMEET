@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meeting Form</title>
     <style>
-        /* Styles from the previous example */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -44,6 +43,7 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 16px;
+            box-sizing: border-box;
         }
         .required::after {
             content: " *";
@@ -62,94 +62,93 @@
         .btn-submit:hover {
             background-color: #2980b9;
         }
+        select {
+            cursor: pointer;
+        }
+        select:focus, input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Update Meeting Details</h1>
-            <p>Please fill out this form to update the meeting</p>
+            <h1>Complete Meeting Details</h1>
+            <p>Please provide your details and select the department you wish to meet with</p>
         </div>
 
         <form id="meetingForm">
             <div class="form-group">
-                <label for="title" class="required">Reason</label>
-                <input type="text" id="reason" name="reason" value="{{ meeting['reason'] }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="date" class="required">Date</label>
-                <input type="date" id="date" name="date" value="{{ meeting['date'] }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="time" class="required">Time</label>
-                <input type="time" id="time" name="time" value="{{ meeting['time'] }}" required>
-            </div>
-
-            <div class="form-group">
                 <label for="user_name" class="required">User Name</label>
-                <input type="text" id="user_name" name="user_name" value="{{ meeting['user_name'] }}" required>
+                <input type="text" id="user_name" name="user_name" value="{{ meeting['user_name'] }}" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="company" class="required">Company</label>
+                <input type="text" id="company" name="company" value="{{ meeting['company'] }}" placeholder="Enter your company name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reason" class="required">Reason</label>
+                <input type="text" id="reason" name="reason" value="{{ meeting['reason'] }}" placeholder="Enter the reason for meeting" required>
             </div>
 
             <div class="form-group">
                 <label for="email" class="required">Email</label>
-                <input type="email" id="email" name="email" value="{{ meeting['email'] }}" required>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
             </div>
 
             <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" id="phone" name="phone" value="{{ meeting['phone'] }}">
+                <label for="department" class="required">Department</label>
+                <select id="department" name="department" required>
+                    <option value="">Select a department</option>
+                    <option value="HR">Human Resources (HR)</option>
+                    <option value="IT">Information Technology (IT)</option>
+                    <option value="DEV">Development (DEV)</option>
+                    <option value="General">General Inquiry</option>
+                </select>
             </div>
 
-            <div class="form-group">
-                <label for="department">Department</label>
-                <input type="text" id="department" name="department" value="{{ meeting['department'] }}">
-            </div>
-
-            <button type="submit" class="btn-submit">Update Meeting</button>
+            <button type="submit" class="btn-submit">Confirm Meeting</button>
         </form>
     </div>
 
     <script>
-        // JavaScript to handle form submission
         document.getElementById('meetingForm').addEventListener('submit', function(e) {
-            e.preventDefault();  // Prevent normal form submission
+            e.preventDefault();
 
-            // Collect data from the form
             const formData = new FormData(this);
             const data = {
-                reason: formData.get('reason'),
-                date: formData.get('date'),
-                time: formData.get('time'),
                 user_name: formData.get('user_name'),
+                company: formData.get('company'),
+                reason: formData.get('reason'),
                 email: formData.get('email'),
-                phone: formData.get('phone'),
                 department: formData.get('department')
             };
 
-            // Dynamically fetch the meeting_id if needed
-            const meetingId = "{{ meeting['id'] }}";  // Assuming you pass the meeting ID from the backend
+            const meetingId = "{{ meeting['id'] }}";
 
-            // Send data as JSON to the server using fetch API
             fetch(`/meetings/${meetingId}`, {
-                method: 'PUT',  // Change POST to PUT for updating
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)  // Convert the data object into JSON
+                body: JSON.stringify(data)
             })
-            .then(response => response.json())  // Parse the response as JSON
+            .then(response => response.json())
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    alert("Meeting updated successfully!");
+                    alert("Meeting confirmed successfully!");
+                    // Optionally redirect or close the window
+                    window.close();
                 } else {
                     alert("Error: " + responseData.message);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred while updating the meeting.');
+                alert('An error occurred while confirming the meeting.');
             });
         });
     </script>

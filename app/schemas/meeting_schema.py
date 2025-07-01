@@ -1,15 +1,27 @@
 from pydantic import BaseModel
-from datetime import date, time, datetime
+from datetime import datetime
 from typing import Optional
 
 
 class MeetingBase(BaseModel):
     reason: str
-    date: date
-    time: time
     user_name: str
+    company: str
+    email: Optional[str] = None 
+    department: Optional[str] = None
+
+
+class MeetingCreate(BaseModel):
+    reason: str
+    user_name: str
+    company: str
+
+
+class MeetingUpdate(BaseModel):
+    reason: str
+    user_name: str
+    company: str
     email: str
-    phone: str
     department: str
 
 
