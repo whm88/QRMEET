@@ -8,6 +8,7 @@ class MeetingBase(BaseModel):
     user_name: str
     company: str
     email: Optional[str] = None 
+    department: Optional[str] = None
 
 
 class MeetingCreate(BaseModel):
@@ -21,6 +22,7 @@ class MeetingUpdate(BaseModel):
     user_name: str
     company: str
     email: str
+    department: str
 
 
 class MeetingResponse(MeetingBase):

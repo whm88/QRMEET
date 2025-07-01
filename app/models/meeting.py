@@ -13,6 +13,7 @@ class Meeting(Base):
     user_name = Column(String(100))
     company = Column(String(100))
     email = Column(String(100), nullable=True)
+    department = Column(String(50), nullable=True)
     confirmed = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -23,6 +24,7 @@ class Meeting(Base):
             "user_name": self.user_name,
             "company": self.company,
             "email": self.email,
+            "department": self.department,
             "confirmed": self.confirmed,
             "created_at": self.created_at,
         }

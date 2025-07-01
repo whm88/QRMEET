@@ -11,6 +11,7 @@ def create_meeting(db: Session, data: dict) -> str:
         user_name=data.get("user_name"),
         company=data.get("company"),
         email=None,
+        department=None,
         confirmed=False,
     )
     db.add(meeting)
@@ -26,7 +27,8 @@ def update_meeting(db: Session, meeting_id: str, data: dict):
     meeting.reason = data.get("reason", meeting.reason)
     meeting.user_name = data.get("user_name", meeting.user_name)
     meeting.company = data.get("company", meeting.company)
-    meeting.email = data["email"]
+    meeting.email = data.get("email")
+    meeting.department = data.get("department")
     meeting.confirmed = True
     db.commit()
     return meeting
